@@ -19,7 +19,8 @@ void ofApp::draw(){
     int w = laserTagImage.getWidth(); //画像の横幅を取得
     int h = laserTagImage.getHeight(); //画像の縦幅を取得
     
-    float maxBrightness = 0;
+    
+    float maxBrightness = 0;　
     int maxBrightnessx = 0;
     int maxBrightnessy = 0;
     
@@ -27,12 +28,12 @@ void ofApp::draw(){
     {
         for(int x=0; x<w; x++)
         {
-            ofColor colorAtXY = laserTagImage.getColor(x,y);
-            float brightnessOfColorAtXY = colorAtXY.getBrightness();
+            ofColor colorAtXY = laserTagImage.getColor(x,y); //指定されたピクセル位置の色を返す
+            float brightnessOfColorAtXY = colorAtXY.getBrightness(); //色から明度を出す
             if(brightnessOfColorAtXY > maxBrightness)
             {
                 
-                maxBrightness = brightnessOfColorAtXY;
+                maxBrightness = brightnessOfColorAtXY; //最大明度が更新される
                 maxBrightnessx = x;
                 maxBrightnessy = y;
             
