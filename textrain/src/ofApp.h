@@ -16,8 +16,11 @@ class ofApp : public ofBaseApp{
     private:
     ofxBox2d world2d;
     vector <ofPtr<ofxBox2dCircle> > circles;
-    ofImage alphabet;
+    
+    ofImage alphabet_a;
+    
     void makeAlphabet(float x, float y, float size);
+    
     
     
 	public:
@@ -38,27 +41,41 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
         ofVideoGrabber cam;
-        //ofxCvColorImage originalImage;
-        //ofxCvGrayscaleImage binaryImage;//閾値処理（２値化）
-        //ofxCvContourFinder contourFinder;//輪郭検出
-    
-        //輪郭線の変更
-        //int numContour;
-        //ofPolyline findLines[MAX_BLOBS];
-        //ofPtr<ofxBox2dPolygon> contour[MAX_BLOBS];
-    
-    
-        //マウスで輪郭
-        //vector <shared_ptr<ofxBox2dEdge> > edges;//edges
-    
-        //vector <ofPolyline> lines;
-    
-    
         ofxCv::ContourFinder contourFinder2;
+    
         vector <ofxBox2dEdge*> edges;
         ofxPanel gui;
         ofParameter<float> minArea, maxArea, threshold;
         ofParameter<bool> holes;
+    
+        // 初期設定
+        void setInit(ofVec2f initPos);
+        // 力をリセット
+        void resetForce();
+        // 力を加える
+        void addForce(ofVec2f force);
+        // 力を更新
+        void updateForce();
+        // 位置の更新
+        void updatePos();
+        // 画面からはみ出たらバウンドさせる
+        void bounceOffWalls();
+        
+        // 描画するパーティクルの数を指定
+        static const int CIRCLE_NUM = 10000;
+        
+        // 位置ベクトルの配列
+        ofVec2f position[CIRCLE_NUM];
+        
+        // 速度ベクトルの配列
+        ofVec2f velocity[CIRCLE_NUM];
+        
+        // 力ベクトルの配列
+        ofVec2f force[CIRCLE_NUM];
+        
+        // 摩擦係数
+        float friction;
+    
 
     
     
